@@ -41,9 +41,11 @@
 
                 \Enlight_Components_Session::setSaveHandler(new SaveHandler($client));
 
-                unset($sessionOptions['save_handler']);
+                unset($sessionOptions['save_handler'], $sessionOptions['redis_options']);
+
+                Shopware()->setOptions('session', $sessionOptions);
             } // if
 
             return parent::factory($container);
         } // function
-    }
+    } // class
