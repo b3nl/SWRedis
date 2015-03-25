@@ -1,0 +1,28 @@
+{
+    "name": "b3nl/swredis",
+    "type": "library",
+    "description": "Redis driver for Shopware",
+    "homepage": "http://github.com/b3nl/SWRedis",
+    "license": "MIT",
+    "support": {
+        "issues": "http://github.com/b3nl/SWRedis/issues"
+    },
+    "authors": [
+        {
+            "name": "Bjoern Lange",
+            "email": "github@b3nl.de",
+            "homepage": "http://b3nl.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "b3nl\\SWRedis\\": "src/"
+        }
+    }
+}
