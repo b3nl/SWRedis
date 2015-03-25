@@ -30,9 +30,7 @@
                         'exceptions' => true,
                         'prefix' => 'session:'
                     ],
-                    isset($sessionOptions['redis_options']) && is_array($sessionOptions['redis_options'])
-                        ? $sessionOptions['redis_options']
-                        : []
+                    Shopware()->getOption('sessionredis', array())
                 );
 
                 $redisOptions['prefix'] = @$redisOptions['prefix'] ?: 'session:';
@@ -40,10 +38,6 @@
                 $client = new PredisClient($redisOptions);
 
                 \Enlight_Components_Session::setSaveHandler(new SaveHandler($client));
-
-                unset($sessionOptions['save_handler'], $sessionOptions['redis_options']);
-
-                Shopware()->setOptions('session', $sessionOptions);
             } // if
 
             return parent::factory($container);
