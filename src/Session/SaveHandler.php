@@ -35,20 +35,13 @@
         } // function
 
         /**
-         * The destruct.
-         */
-        public function __destruct()
-        {
-            $this->close();
-        } // function
-
-        /**
          * Close Session - free resources
          * @return void
          */
         public function close()
         {
-            $this->redisClient = null;
+            // do nothing, like in the dbtable adapter.
+            return true;
         } // function
 
         /**
