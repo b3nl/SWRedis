@@ -1,4 +1,5 @@
 {
+    "keywords": ["nosql", "redis", "shopware"],
     "name": "b3nl/swredis",
     "type": "library",
     "description": "Redis driver for Shopware",
