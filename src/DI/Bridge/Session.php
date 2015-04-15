@@ -1,43 +1,43 @@
 <?php
-    namespace b3nl\SWRedis\DI\Bridge;
+namespace b3nl\SWRedis\DI\Bridge;
 
-    use b3nl\SWRedis\Session\SaveHandler,
-        Predis\Client as PredisClient,
-        Shopware\Components\DependencyInjection\Bridge\Session as SessionBase,
-        Shopware\Components\DependencyInjection\Container;
+use b3nl\SWRedis\Session\SaveHandler;
+use Predis\Client as PredisClient;
+use Shopware\Components\DependencyInjection\Bridge\Session as SessionBase;
+use Shopware\Components\DependencyInjection\Container;
 
+/**
+ * Injects the session to redis.
+ * @author blange <github@b3nl.de>
+ * @package b3nl\SWRedis
+ * @subpackage DI\Bridge
+ * @version $id$
+ */
+class Session extends SessionBase
+{
     /**
-     * Injects the session to redis.
-     * @author blange <github@b3nl.de>
-     * @package b3nl\SWRedis
-     * @subpackage DI\Bridge
-     * @version $id$
+     * Starts the redis connection.
+     * @param Container $container
+     * @return \Enlight_Components_Session_Namespace
      */
-    class Session extends SessionBase
+    public function factory(Container $container)
     {
-        /**
-         * Starts the redis connection.
-         * @param Container $container
-         * @return \Enlight_Components_Session_Namespace
-         */
-        public function factory(Container $container)
-        {
-            $sessionOptions = Shopware()->getOption('session', array());
+        $sessionOptions = Shopware()->getOption('session', []);
 
-            if (@$sessionOptions['save_handler'] === 'redis') {
-                $redisOptions = array_merge(
-                    [
-                        'exceptions' => true,
-                        'prefix' => 'session:'
-                    ],
-                    Shopware()->getOption('sessionredis', array())
-                );
+        if (@$sessionOptions['save_handler'] === 'redis') {
+            $redisOptions = array_merge(
+                [
+                    'exceptions' => true,
+                    'prefix' => 'session:'
+                ],
+                Shopware()->getOption('sessionredis', [])
+            );
 
-                $client = new PredisClient($redisOptions);
+            $client = new PredisClient($redisOptions);
 
-                \Enlight_Components_Session::setSaveHandler(new SaveHandler($client));
-            } // if
+            \Enlight_Components_Session::setSaveHandler(new SaveHandler($client));
+        } // if
 
-            return parent::factory($container);
-        } // function
-    } // class
+        return parent::factory($container);
+    } // function
+}

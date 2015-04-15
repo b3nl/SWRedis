@@ -19,11 +19,17 @@
         "php": ">=5.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.4"
+        "phpunit/phpunit": "~4.4",
+        "squizlabs/php_codesniffer": "2.*"
     },
     "autoload": {
         "psr-4": {
             "b3nl\\SWRedis\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "b3nl\\SWRedis\\Tests\\": "tests/"
         }
     }
 }
