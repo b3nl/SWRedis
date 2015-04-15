@@ -33,8 +33,6 @@
                     Shopware()->getOption('sessionredis', array())
                 );
 
-                $redisOptions['prefix'] = @$redisOptions['prefix'] ?: 'session:';
-
                 $client = new PredisClient($redisOptions);
 
                 \Enlight_Components_Session::setSaveHandler(new SaveHandler($client));
